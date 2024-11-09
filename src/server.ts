@@ -21,13 +21,19 @@ app.use((req, res, next) => {
     next();
 })
 
-app.get('/', (req, res) => {
-    console.log('hello from express');
-    res.status(200).json({ message: 'hello' });
+app.get('/', (req, res, next) => {
+    setTimeout(() => {
+        next(new Error('Something went wrong. Please try again.'))
+    }, 1);
 });
 
 app.use('/api', protect, router);
 app.post('/signup', signUp);
 app.post('/signin', signIn);
+
+app.use((err, req, res, next) => {
+    console.error(err);
+    res.json({ message: 'Something went wrong' });
+});
 
 export default app;

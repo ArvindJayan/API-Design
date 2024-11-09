@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { body } from 'express-validator';
 import { createProduct, deleteProduct, getProduct, getProducts, updateProduct } from './handlers/products';
+import { createUpdatePoint, deleteUpdatePoint, getUpdatePoint, getUpdatePoints, updateUpdatePoint } from './handlers/updatePoints';
 import { createUpdate, deleteUpdate, getUpdate, getUpdates, updateUpdate } from './handlers/updates';
 import { handleInputError } from './modules/middleware';
 
@@ -37,19 +38,19 @@ router.delete('/update/:id', deleteUpdate);
 /**
  * Update Point
  */
-router.get('/updatepoint', () => { });
-router.get('/updatepoint/:id', () => { });
+router.get('/updatepoint', getUpdatePoints);
+router.get('/updatepoint/:id', getUpdatePoint);
 router.put('/updatepoint/:id',
     body('name').optional().isString(),
     body('description').optional().isString(),
-    () => { }
+    updateUpdatePoint
 );
 router.post('/updatepoint',
     body('name').isString(),
     body('description').isString(),
     body('updateId').exists().isString(),
-    () => { }
+    createUpdatePoint
 );
-router.delete('/updatepoint/:id', () => { });
+router.delete('/updatepoint/:id', deleteUpdatePoint);
 
 export default router;

@@ -100,6 +100,6 @@ export const deleteUpdate = async (req, res) => {
         where: {
             id: req.params.id
         }
-    })
-    res.json({ data: deleted })
+    });
+    res.json({ data: deleted });
 }
