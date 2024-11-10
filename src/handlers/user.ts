@@ -1,7 +1,7 @@
 import { comparePasswords, createJWT, hashPassword } from '../modules/auth';
 import prisma from '../modules/db';
 
-export const signUp = async (req, res) => {
+export const signUp = async (req, res, next) => {
     const { username, password } = req.body;
 
     if (!username || !password) {
@@ -18,9 +18,9 @@ export const signUp = async (req, res) => {
 
         const token = createJWT(user);
         res.json({ token: token });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Error creating user' });
+    } catch (e) {
+        e.type = 'input';
+        next(e);
     }
 }
 

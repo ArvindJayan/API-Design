@@ -53,4 +53,9 @@ router.post('/updatepoint',
 );
 router.delete('/updatepoint/:id', deleteUpdatePoint);
 
+router.use((err, req, res, next) => {
+    console.log(err);
+    res.json({ message: 'An error occurred in the route handler' });
+});
+
 export default router;
