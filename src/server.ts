@@ -22,9 +22,7 @@ app.use((req, res, next) => {
 })
 
 app.get('/', (req, res, next) => {
-    setTimeout(() => {
-        next(new Error('Something went wrong. Please try again.'))
-    }, 1);
+    res.json({ message: 'Server is up and running' });
 });
 
 app.use('/api', protect, router);
